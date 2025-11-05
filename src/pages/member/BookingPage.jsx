@@ -18,16 +18,29 @@ import {
     CheckCircleOutlined,
 } from "@ant-design/icons";
 import { appointmentService } from "../../services/appointmentService";
+import { adminService } from "../../services/adminService";
 
 const BookingPage = () => {
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selectedAppointment, setSelectedAppointment] = useState(null);
     const [detailModalVisible, setDetailModalVisible] = useState(false);
+    const [serviceCenters, setServiceCenters] = useState([]);
 
     useEffect(() => {
         loadAppointments();
+        loadServiceCenters();
     }, []);
+
+    const loadServiceCenters = async () => {
+        try {
+            const response = await adminService.getAllServiceCenters({ skip: 0, limit: 1000 });
+            const centers = response.data?.data || [];
+            setServiceCenters(centers);
+        } catch (error) {
+            console.error("Không thể tải danh sách chi nhánh:", error);
+        }
+    };
 
     const loadAppointments = async () => {
         setLoading(true);
@@ -69,6 +82,11 @@ const BookingPage = () => {
             CANCELLED: "red",
         };
         return statusColors[status] || "default";
+    };
+
+    const getServiceCenterName = (serviceCenterId) => {
+        const center = serviceCenters.find(c => c.id === serviceCenterId);
+        return center ? center.name : 'N/A';
     };
 
     const getStatusText = (status) => {
@@ -338,6 +356,11 @@ const BookingPage = () => {
                                 <Tag color={getPriorityColor(selectedAppointment.priority)}>
                                     {getPriorityText(selectedAppointment.priority)}
                                 </Tag>
+                            </Descriptions.Item>
+                            <Descriptions.Item label="Chi nhánh" span={2}>
+                                <div className="font-medium text-gray-800">
+                                    {getServiceCenterName(selectedAppointment.service_center_id)}
+                                </div>
                             </Descriptions.Item>
                             <Descriptions.Item label="Ngày hẹn" span={2}>
                                 {formatDate(selectedAppointment.scheduled_date)}

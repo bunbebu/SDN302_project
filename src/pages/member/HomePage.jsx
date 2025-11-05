@@ -12,14 +12,14 @@ import {
 import { PlusOutlined, CarOutlined } from "@ant-design/icons";
 import VehicleCard from "../../components/vehicle/VehicleCard";
 import VehicleFormModal from "../../components/vehicle/VehicleFormModal";
-import ServiceCenterModal from "../../components/vehicle/ServiceCenterModal";
+import BookingModal from "../../components/vehicle/BookingModal";
 import { vehicleService } from "../../services/vehicleService";
 
 const MemberHomePage = () => {
     const [vehicles, setVehicles] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showVehicleModal, setShowVehicleModal] = useState(false);
-    const [showServiceCenterModal, setShowServiceCenterModal] = useState(false);
+    const [showBookingModal, setShowBookingModal] = useState(false);
     const [showDetailModal, setShowDetailModal] = useState(false);
     const [selectedVehicle, setSelectedVehicle] = useState(null);
     const [editingVehicle, setEditingVehicle] = useState(null);
@@ -162,7 +162,7 @@ const MemberHomePage = () => {
 
     const handleBookService = (vehicle) => {
         setSelectedVehicle(vehicle);
-        setShowServiceCenterModal(true);
+        setShowBookingModal(true);
     };
 
     const handleSelectServiceCenter = (center, vehicle) => {
@@ -176,7 +176,7 @@ const MemberHomePage = () => {
 
     const handleBookFromDetail = () => {
         setShowDetailModal(false);
-        setShowServiceCenterModal(true);
+        setShowBookingModal(true);
     };
 
     const formatDate = (dateString) => {
@@ -265,14 +265,16 @@ const MemberHomePage = () => {
                 isEditMode={!!editingVehicle}
             />
 
-            {/* Service Center Modal */}
-            <ServiceCenterModal
-                visible={showServiceCenterModal}
+            {/* Booking Modal */}
+            <BookingModal
+                visible={showBookingModal}
                 onClose={() => {
-                    setShowServiceCenterModal(false);
+                    setShowBookingModal(false);
                     setSelectedVehicle(null);
                 }}
-                onSelectCenter={handleSelectServiceCenter}
+                onSuccess={() => {
+                    loadVehicles(); // Reload danh sách xe sau khi đặt lịch thành công
+                }}
                 vehicle={selectedVehicle}
             />
 

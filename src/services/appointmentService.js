@@ -16,6 +16,9 @@ export const appointmentService = {
     if (params.service_center_id !== undefined) {
       queryParams.append("service_center_id", params.service_center_id);
     }
+    if (params.vehicle_id !== undefined) {
+      queryParams.append("vehicle_id", params.vehicle_id);
+    }
     if (params.start_date) {
       queryParams.append("start_date", params.start_date);
     }
@@ -43,6 +46,43 @@ export const appointmentService = {
       params.append("include_services", "true");
     }
     return axiosCustom.get(`/appointments/my?${params.toString()}`);
+  },
+
+  createAppointment: async (appointmentData) => {
+    // Try form-urlencoded with proper array format
+    const params = new URLSearchParams();
+
+    // Required fields
+    params.append("vehicle_id", appointmentData.vehicle_id);
+    params.append("service_center_id", appointmentData.service_center_id);
+    params.append("scheduled_date", appointmentData.scheduled_date);
+
+    // Optional fields
+    if (appointmentData.priority) {
+      params.append("priority", appointmentData.priority);
+    }
+    if (appointmentData.notes) {
+      params.append("notes", appointmentData.notes);
+    }
+
+    // Service IDs - try JSON string format
+    if (
+      appointmentData.service_ids &&
+      Array.isArray(appointmentData.service_ids)
+    ) {
+      // Send as JSON string
+      params.append("service_ids", JSON.stringify(appointmentData.service_ids));
+    }
+
+    console.log("🚀 Sending params:", params.toString());
+
+    const response = await axiosCustom.post("/appointments/", params, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
+
+    return response.data;
   },
 
   updateAppointment: (id, appointmentData) => {
