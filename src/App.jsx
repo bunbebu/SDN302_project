@@ -23,6 +23,8 @@ import StaffServiceList from "./pages/staff/ServiceList";
 import StaffServiceCategories from "./pages/staff/ServiceCategories";
 import StaffBookingManagement from "./pages/staff/BookingManagement";
 import ServiceRecordManagement from "./pages/staff/ServiceRecordManagement";
+import TechnicianList from "./pages/staff/TechnicianList";
+import CustomerList from "./pages/staff/CustomerList";
 
 import UnauthorizedPage from "./pages/common/UnauthorizedPage";
 import NotFoundPage from "./pages/common/NotFoundPage";
@@ -77,6 +79,8 @@ function App() {
               />
               <Route path="inventory" element={<InventoryManagement />} />
               <Route path="parts" element={<PartManagement />} />
+              <Route path="technicians" element={<TechnicianList />} />
+              <Route path="customers" element={<CustomerList />} />
             </Route>
 
             <Route path="*" element={<NotFoundPage />} />

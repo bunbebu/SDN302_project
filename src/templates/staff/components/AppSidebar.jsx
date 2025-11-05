@@ -62,7 +62,12 @@ const menuItems = [
     <FileTextOutlined />
   ),
   getItem(
-    <Link to="/staff/customers">Khách hàng</Link>,
+    <Link to="/staff/technicians">Danh sách kỹ thuật viên</Link>,
+    "/staff/technicians",
+    <UserOutlined />
+  ),
+  getItem(
+    <Link to="/staff/customers">Danh sách khách hàng</Link>,
     "/staff/customers",
     <UserOutlined />
   ),

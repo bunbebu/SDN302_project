@@ -4,3 +4,5 @@ export { default as ServiceList } from './ServiceList';
 export { default as ServiceCategories } from './ServiceCategories';
 export { default as BookingManagement } from './BookingManagement';
 export { default as ServiceRecordManagement } from './ServiceRecordManagement';
+export { default as TechnicianList } from './TechnicianList';
+export { default as CustomerList } from './CustomerList';

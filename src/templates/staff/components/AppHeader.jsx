@@ -88,7 +88,7 @@ const AppHeader = ({ collapsed, setCollapsed }) => {
         <Dropdown overlay={userMenu} placement="bottomRight">
           <Space style={{ cursor: "pointer" }}>
             <Avatar icon={<UserOutlined />} />
-            <span>Admin</span>
+            <span>Staff</span>
           </Space>
         </Dropdown>
       </Space>
