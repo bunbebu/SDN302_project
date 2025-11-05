@@ -32,26 +32,32 @@ export const serviceRecordService = {
     return axiosCustom.get(`/service-records/${id}/`);
   },
 
+  getMyServiceRecords: (skip = 0, limit = 100) => {
+    const params = new URLSearchParams();
+    params.append("skip", skip);
+    params.append("limit", limit);
+    return axiosCustom.get(`/service-records/my?${params.toString()}`);
+  },
+
   updateServiceRecord: (id, recordData) => {
     return axiosCustom.put(`/service-records/${id}/`, recordData);
   },
 
   updateServiceRecordStatus: (id, statusData) => {
-    const requestData = typeof statusData === 'string' 
-      ? { status: statusData }
-      : statusData;
+    const requestData =
+      typeof statusData === "string" ? { status: statusData } : statusData;
 
     // Tạo query parameters
     const queryParams = new URLSearchParams();
-    Object.keys(requestData).forEach(key => {
+    Object.keys(requestData).forEach((key) => {
       if (requestData[key] !== null && requestData[key] !== undefined) {
         queryParams.append(key, requestData[key]);
       }
     });
 
     const url = `/service-records/${id}/status?${queryParams.toString()}`;
-    console.log('Request URL:', url);
-    
+    console.log("Request URL:", url);
+
     // Gửi PATCH request với query parameters (không có body)
     return axiosCustom.patch(url);
   },

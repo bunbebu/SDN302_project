@@ -6,6 +6,7 @@ import { App as AntApp } from "antd";
 
 import AdminLayout from "./templates/admin/AdminLayout";
 import StaffLayout from "./templates/staff/StaffLayout";
+import MemberLayout from "./templates/member/MemberLayout";
 import AuthGuard from "./components/AuthGuard";
 
 import LoginPage from "./pages/login/LoginPage";
@@ -25,6 +26,11 @@ import StaffBookingManagement from "./pages/staff/BookingManagement";
 import ServiceRecordManagement from "./pages/staff/ServiceRecordManagement";
 import TechnicianList from "./pages/staff/TechnicianList";
 import CustomerList from "./pages/staff/CustomerList";
+
+import MemberHomePage from "./pages/member/HomePage";
+import MemberBookingPage from "./pages/member/BookingPage";
+import MemberHistoryPage from "./pages/member/HistoryPage";
+import MemberProfilePage from "./pages/member/ProfilePage";
 
 import UnauthorizedPage from "./pages/common/UnauthorizedPage";
 import NotFoundPage from "./pages/common/NotFoundPage";
@@ -81,6 +87,13 @@ function App() {
               <Route path="parts" element={<PartManagement />} />
               <Route path="technicians" element={<TechnicianList />} />
               <Route path="customers" element={<CustomerList />} />
+            </Route>
+
+            <Route path="/member" element={<MemberLayout />}>
+              <Route index element={<MemberHomePage />} />
+              <Route path="bookings" element={<MemberBookingPage />} />
+              <Route path="history" element={<MemberHistoryPage />} />
+              <Route path="profile" element={<MemberProfilePage />} />
             </Route>
 
             <Route path="*" element={<NotFoundPage />} />
