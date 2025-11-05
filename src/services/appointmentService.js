@@ -35,21 +35,36 @@ export const appointmentService = {
     return axiosCustom.get(`/appointments/${id}/`);
   },
 
+  getMyAppointments: (skip = 0, limit = 100, includeServices = true) => {
+    const params = new URLSearchParams();
+    params.append("skip", skip);
+    params.append("limit", limit);
+    if (includeServices) {
+      params.append("include_services", "true");
+    }
+    return axiosCustom.get(`/appointments/my?${params.toString()}`);
+  },
+
   updateAppointment: (id, appointmentData) => {
     return axiosCustom.put(`/appointments/${id}/`, appointmentData);
   },
 
-  cancelAppointment: (id, cancelReason) => {
-    return axiosCustom.patch(`/appointments/${id}/cancel/`, {
-      cancel_reason: cancelReason
-    });
+  cancelAppointment: (id, cancelReason = "Khách hàng hủy") => {
+    // DELETE method with cancel_reason as query parameter in URL
+    const params = new URLSearchParams();
+    params.append("cancel_reason", cancelReason);
+    return axiosCustom.delete(`/appointments/${id}?${params.toString()}`);
+  },
+
+  // Alternative cancel method if API uses different endpoint
+  cancelAppointmentDirect: (id) => {
+    return axiosCustom.delete(`/appointments/${id}`);
   },
 
   updateAppointmentStatus: (id, statusData) => {
-    const requestData = typeof statusData === 'string' 
-      ? { status: statusData }
-      : statusData;
-      
+    const requestData =
+      typeof statusData === "string" ? { status: statusData } : statusData;
+
     return axiosCustom.put(`/appointments/${id}/status`, requestData);
   },
 };
