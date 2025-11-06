@@ -1,0 +1,38 @@
+/* Orange & white admin theme */
+.admin-orange { --admin-orange: #f97316; --admin-orange-50: #fff7ed; --admin-orange-100: #ffedd5; }
+
+.admin-orange .ant-layout { background: var(--layout-bg); }
+
+/* Light sidebar */
+.admin-orange .ant-layout-sider {
+  background: #ffffff !important;
+  border-right: 1px solid #eef2f7;
+}
+
+.admin-orange .ant-menu-light, .admin-orange .ant-menu-light .ant-menu-sub, .admin-orange .ant-menu {
+  background: transparent;
+}
+.admin-orange .ant-menu-light .ant-menu-item-selected,
+.admin-orange .ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title {
+  background: var(--admin-orange-50);
+  color: var(--admin-orange);
+}
+.admin-orange .ant-menu-light .ant-menu-item:hover,
+.admin-orange .ant-menu-light .ant-menu-submenu-title:hover {
+  background: var(--admin-orange-100);
+}
+
+/* Header orange bar */
+.admin-orange .ant-layout-header {
+  background: linear-gradient(90deg, #ff7a00, #ffa94d) !important;
+  color: #ffffff;
+}
+.admin-orange .ant-layout-header .ant-avatar { box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+
+/* Content card */
+.admin-orange .admin-content-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(16,24,40,0.06);
+}
+

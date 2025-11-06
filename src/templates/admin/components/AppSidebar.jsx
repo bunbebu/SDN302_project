@@ -127,6 +127,8 @@ const AppSidebar = ({ collapsed, setCollapsed }) => {
         top: 0,
         bottom: 0,
         zIndex: 1000,
+        background: "#fff",
+        borderRight: "1px solid #eef2f7",
       }}
       onMouseEnter={() => setCollapsed(false)}
       onMouseLeave={() => setCollapsed(true)}
@@ -151,24 +153,19 @@ const AppSidebar = ({ collapsed, setCollapsed }) => {
           }}
         />
         {!collapsed && (
-          <span
-            style={{
-              color: "white",
-              fontSize: "20px",
-              fontWeight: "bold",
-            }}
-          >
-            EV-Care Admin
+          <span style={{ color: "#0f172a", fontSize: "18px", fontWeight: "bold" }}>
+            EV Service Admin
           </span>
         )}
       </div>
       <Menu
-        theme="dark"
+        theme="light"
         mode="inline"
         selectedKeys={[location.pathname]}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
         items={menuItems}
+        style={{ background: "transparent" }}
       />
     </Sider>
   );

@@ -1,0 +1,39 @@
+/* Orange/white login theme overrides scoped to .login-orange */
+.login-orange {
+  --o: #ff7a00;
+  --o-600: #e86a00;
+  --o-50: #fff7ed;
+}
+
+.login-orange .btn-orange.ant-btn-primary {
+  background: linear-gradient(90deg, var(--o) 0%, #ffa94d 100%);
+  border-color: var(--o);
+}
+.login-orange .btn-orange.ant-btn-primary:hover,
+.login-orange .btn-orange.ant-btn-primary:focus {
+  background: linear-gradient(90deg, var(--o-600) 0%, #ff9b2e 100%);
+  border-color: var(--o-600);
+}
+
+/* Tabs highlight to orange */
+.login-orange .login-tabs .ant-tabs-ink-bar {
+  background: var(--o) !important;
+}
+.login-orange .login-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--o) !important;
+}
+
+/* Inputs focus border */
+.login-orange .ant-input-affix-wrapper:focus,
+.login-orange .ant-input-affix-wrapper-focused,
+.login-orange .ant-input-affix-wrapper:hover {
+  border-color: var(--o) !important;
+}
+
+/* Checkbox color */
+.login-orange .ant-checkbox-checked .ant-checkbox-inner,
+.login-orange .ant-checkbox-checked:hover .ant-checkbox-inner {
+  background-color: var(--o) !important;
+  border-color: var(--o) !important;
+}
+

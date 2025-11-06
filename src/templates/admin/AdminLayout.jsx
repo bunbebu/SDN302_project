@@ -1,53 +1,58 @@
 import React, { useState } from "react";
-import { Layout } from "antd";
+import { Layout, ConfigProvider } from "antd";
 import { Outlet } from "react-router-dom";
 import AppSidebar from "./components/AppSidebar";
 import AppHeader from "./components/AppHeader";
 import AppFooter from "./components/AppFooter";
+import "./admin.css";
 
 const { Content } = Layout;
 
 const AdminLayout = () => {
-  // Bắt đầu với trạng thái đóng (true)
   const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      {/* Sidebar giờ đây sẽ nhận state và hàm set */}
-      <AppSidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-
-      {/* Layout chính (Header + Content + Footer) cần phải có lề
-          để không bị Sidebar (fixed) che mất */}
-      <Layout
-        style={{
-          // 80px là độ rộng mặc định khi thu gọn của Ant Sider
-          // 250px là độ rộng khi mở rộng ta set ở AppSidebar
-          marginLeft: collapsed ? 80 : 250,
-          transition: "margin-left 0.2s", // Đồng bộ với animation của sidebar
+    <div className="admin-orange">
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#f97316",
+            colorInfo: "#f97316",
+            colorBgBase: "#fff7ed",
+            colorText: "#0f172a",
+            borderRadius: 10,
+          },
+          components: {
+            Menu: { itemSelectedBg: "#fff7ed", itemSelectedColor: "#f97316" },
+          },
         }}
       >
-        {/* Header của trang */}
-        <AppHeader collapsed={collapsed} />
+        <Layout style={{ minHeight: "100vh", background: "var(--layout-bg)" }}>
+          <AppSidebar collapsed={collapsed} setCollapsed={setCollapsed} />
 
-        {/* Nội dung chính của trang */}
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: "#fff", // Màu nền cho khu vực nội dung
-            borderRadius: "8px",
-          }}
-        >
-          {/* Outlet sẽ render các component con dựa trên route */}
-          <Outlet />
-        </Content>
+          <Layout
+            style={{
+              marginLeft: collapsed ? 80 : 250,
+              transition: "margin-left 0.2s",
+              background: "var(--layout-bg)",
+            }}
+          >
+            <AppHeader collapsed={collapsed} />
 
-        {/* Footer của trang */}
-        <AppFooter />
-      </Layout>
-    </Layout>
+            <Content
+              style={{ margin: "24px 16px", padding: 24, minHeight: 280 }}
+              className="admin-content-card"
+            >
+              <Outlet />
+            </Content>
+
+            <AppFooter />
+          </Layout>
+        </Layout>
+      </ConfigProvider>
+    </div>
   );
 };
 
 export default AdminLayout;
+
